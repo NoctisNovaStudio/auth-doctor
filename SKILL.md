@@ -1,4 +1,4 @@
----
+﻿---
 name: auth-doctor
 version: 1.0.0
 publisher: NoctisNova
@@ -347,10 +347,10 @@ curl -H "Accept: text/markdown" https://noctisnova.com/tools/auth-doctor/jwt-sec
 | Resource | URL |
 |---|---|
 | NoctisNova | https://noctisnova.com |
-| Unprotected Routes Guide | https://noctisnova.com/docs/auth/unprotected-routes |
-| Server Actions Auth Guide | https://noctisnova.com/docs/auth/server-actions |
-| Token Storage Guide | https://noctisnova.com/docs/auth/token-storage |
-| JWT Security Guide | https://noctisnova.com/docs/auth/jwt-security |
-| CSRF Protection Guide | https://noctisnova.com/docs/auth/csrf-protection |
+| Unprotected Routes Guide | https://noctisnova.com/tools/auth-doctor/auth-security-best-practices |
+| Server Actions Auth Guide | https://noctisnova.com/tools/auth-doctor/auth-security-best-practices |
+| Token Storage Guide | https://noctisnova.com/tools/auth-doctor/auth-security-best-practices |
+| JWT Security Guide | https://noctisnova.com/tools/auth-doctor/jwt-security |
+| CSRF Protection Guide | https://noctisnova.com/tools/auth-doctor/advanced-auth-security |
 | NextAuth docs | https://authjs.dev |
 | Clerk docs | https://clerk.com/docs |

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ui.js — auth-doctor
  * Terminal UI: score box, numbered security issue list, agent prompt builder.
  */
@@ -33,7 +33,7 @@ const RULE_META = {
       "An unprotected POST /api/users/delete endpoint means anyone with the URL can delete any " +
       "user account without logging in. No credentials needed — just a curl command.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/unprotected-routes",
+    docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
   },
 
   "unprotected-action": {
@@ -50,7 +50,7 @@ const RULE_META = {
       "A createInvoice() Server Action with no auth check lets any visitor submit arbitrary invoice " +
       "data directly to your database — even if no UI form is visible to them.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/server-actions",
+    docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
   },
 
   "localstorage-session": {
@@ -68,7 +68,7 @@ const RULE_META = {
       "all auth tokens, and silently sends them to an attacker's server. Every active session " +
       "is compromised instantly with no way to detect or revoke them.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/token-storage",
+    docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
   },
 
   "jwt-no-verify": {
@@ -86,7 +86,7 @@ const RULE_META = {
       "calls jwt.decode(). The server reads { role: 'admin' } and grants admin access. No " +
       "password or account needed.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/jwt-security",
+    docs: "https://noctisnova.com/tools/auth-doctor/jwt-security",
   },
 
   "csrf-missing": {
@@ -104,7 +104,7 @@ const RULE_META = {
       "a POST to your /api/transfer endpoint using the user's session cookie. Money moves. " +
       "The user never clicked anything.",
     severity: "warning",
-    docs: "https://noctisnova.com/docs/auth/csrf-protection",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   // ── Advanced security engine ──────────────────────────────────────────────
@@ -123,7 +123,7 @@ const RULE_META = {
       "A Stripe `sk_live_` key committed once stays in Git history forever. Bots scrape public and even " +
       "private repos for these patterns within minutes and drain accounts before you notice.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/secret-management",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   "public-env-secret": {
@@ -140,7 +140,7 @@ const RULE_META = {
       "`NEXT_PUBLIC_STRIPE_SECRET_KEY` or a service-role key in a NEXT_PUBLIC_ var is visible to every " +
       "visitor in the page source. It must be server-only and rotated immediately.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/secret-management",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   "idor-missing-ownership": {
@@ -157,7 +157,7 @@ const RULE_META = {
       "`DELETE /api/posts/[id]` that just calls `prisma.post.delete({ where: { id } })` lets any user delete " +
       "any other user's posts by changing the id in the URL. Auth passes; authorization doesn't.",
     severity: "critical",
-    docs: "https://noctisnova.com/docs/auth/object-level-authorization",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   "open-redirect": {
@@ -173,7 +173,7 @@ const RULE_META = {
       "`/login?next=https://evil.com` — after login your app redirects to evil.com. The victim trusts the " +
       "link because it started on your domain. Common in OAuth/login callback flows.",
     severity: "warning",
-    docs: "https://noctisnova.com/docs/auth/open-redirect",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   "missing-rate-limit": {
@@ -189,7 +189,7 @@ const RULE_META = {
       "A 6-digit OTP with no rate limit is crackable in seconds (a million guesses is trivial). A login with " +
       "no limit lets credential-stuffing bots try millions of leaked passwords against your users.",
     severity: "warning",
-    docs: "https://noctisnova.com/docs/auth/rate-limiting",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 
   "sensitive-field-exposure": {
@@ -205,7 +205,7 @@ const RULE_META = {
       "An endpoint returns the full Prisma user object, including `passwordHash`. Attackers harvest the hashes " +
       "and crack weak passwords offline at leisure. Return only the fields the client needs.",
     severity: "warning",
-    docs: "https://noctisnova.com/docs/auth/sensitive-data-exposure",
+    docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
   },
 };
 
@@ -335,7 +335,7 @@ export function renderIssueList(issues, { colour = true } = {}) {
       explanation: "",
       realWorld: "",
       severity: "info",
-      docs: "https://noctisnova.com/docs/auth",
+      docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
     };
 
     const count      = ruleIssues.length;

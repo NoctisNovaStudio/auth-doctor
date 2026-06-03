@@ -1,4 +1,4 @@
-/**
+﻿/**
  * scanner.js — auth-doctor
  * AST-based static analyser for authentication and security vulnerabilities.
  * Targets Next.js App Router + TypeScript codebases.
@@ -242,7 +242,7 @@ export async function scanUnprotectedRoutes(projectPath) {
         line,
         snippet: trimSnippet(`export async function ${name}(req)`),
         message: `Exported \`${name}\` handler in API route has no detectable auth check — any unauthenticated request can call this endpoint.`,
-        docs: "https://noctisnova.com/docs/auth/unprotected-routes",
+        docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
         penalty: PENALTY_UNPROTECTED_ROUTE,
       });
     }
@@ -320,7 +320,7 @@ export async function scanUnprotectedServerActions(projectPath) {
         line,
         snippet: trimSnippet(`export async function ${name}()`),
         message: `Server Action \`${name}\` has no auth check — Server Actions are directly callable by clients and must verify the caller's identity before mutating data.`,
-        docs: "https://noctisnova.com/docs/auth/server-actions",
+        docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
         penalty: PENALTY_UNPROTECTED_ACTION,
       });
     }
@@ -373,7 +373,7 @@ export async function scanLocalStorageSessionStorage(projectPath) {
           message:
             "Auth token or session data written to localStorage — XSS attacks can steal it. " +
             "Use httpOnly cookies (set server-side) which are inaccessible to JavaScript.",
-          docs: "https://noctisnova.com/docs/auth/token-storage",
+          docs: "https://noctisnova.com/tools/auth-doctor/auth-security-best-practices",
           penalty: PENALTY_LOCALSTORAGE_SESSION,
         });
       }
@@ -431,7 +431,7 @@ export async function scanJwtWithoutVerification(projectPath) {
         message:
           "JWT is decoded without signature verification — a client can forge any payload by crafting a token with a matching header/payload and an invalid signature. " +
           "Always use jwt.verify(token, secret) to validate both the signature and expiry.",
-        docs: "https://noctisnova.com/docs/auth/jwt-security",
+        docs: "https://noctisnova.com/tools/auth-doctor/jwt-security",
         penalty: PENALTY_JWT_NO_VERIFY,
       });
     }
@@ -521,7 +521,7 @@ export async function scanMissingCsrf(projectPath) {
         snippet: trimSnippet(`export async function ${name}(req)`),
         message:
           `\`${name}\` handler has no CSRF protection and no session-based auth — a malicious site can trick a logged-in user's browser into making this request without their knowledge.`,
-        docs: "https://noctisnova.com/docs/auth/csrf-protection",
+        docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
         penalty: PENALTY_CSRF_MISSING,
       });
     }

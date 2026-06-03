@@ -1,4 +1,4 @@
-/**
+﻿/**
  * advanced.js — auth-doctor
  *
  * The advanced security engine — the vulnerabilities that actually get companies
@@ -141,7 +141,7 @@ export async function scanHardcodedSecrets(projectPath) {
           `A ${hit} appears to be hardcoded in source. Anyone with repo access (or a leaked Git history) ` +
           "gets your production credentials. Move it to an environment variable (`process.env.X`), rotate the " +
           "exposed key immediately, and add it to a secret manager — committed secrets are compromised forever.",
-        docs: "https://noctisnova.com/docs/auth/secret-management",
+        docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
         penalty: PENALTY_HARDCODED_SECRET,
       });
     }
@@ -183,7 +183,7 @@ export async function scanPublicEnvSecrets(projectPath) {
             `\`${name}\` is a NEXT_PUBLIC_ variable — Next.js inlines its value into the JavaScript bundle ` +
             "shipped to every browser. A name like this holds a secret, so it's now public to the world. " +
             "Rename it without the NEXT_PUBLIC_ prefix, read it only on the server, and rotate the value.",
-          docs: "https://noctisnova.com/docs/auth/secret-management",
+          docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
           penalty: PENALTY_PUBLIC_ENV_SECRET,
         });
       }
@@ -237,7 +237,7 @@ export async function scanIdorOwnership(projectPath) {
           "that the record belongs to the current user. That's an IDOR (OWASP API #1): any logged-in user can " +
           "tamper with anyone's data by changing the id. Scope the query — `where: { id, userId: session.user.id }` " +
           "— or fetch first and verify ownership before mutating.",
-        docs: "https://noctisnova.com/docs/auth/object-level-authorization",
+        docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
         penalty: PENALTY_IDOR,
       });
     }
@@ -302,7 +302,7 @@ export async function scanOpenRedirect(projectPath) {
             "Attackers craft links like `/login?next=https://evil.com` to bounce victims to phishing pages that look " +
             "like they came from your domain. Validate the target is a relative path you own (e.g. it starts with '/' " +
             "and isn't '//'), or match it against an allow-list before redirecting.",
-          docs: "https://noctisnova.com/docs/auth/open-redirect",
+          docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
           penalty: PENALTY_OPEN_REDIRECT,
         });
         break; // one per function
@@ -350,7 +350,7 @@ export async function scanMissingRateLimit(projectPath) {
         "This looks like an authentication endpoint (login / register / reset / OTP) with no rate limiting. " +
         "Without it, attackers can brute-force passwords and OTPs and enumerate accounts at thousands of requests " +
         "per second. Add a limiter (e.g. @upstash/ratelimit) keyed by IP + identifier, with exponential backoff on failures.",
-      docs: "https://noctisnova.com/docs/auth/rate-limiting",
+      docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
       penalty: PENALTY_MISSING_RATE_LIMIT,
     });
   }
@@ -394,7 +394,7 @@ export async function scanSensitiveExposure(projectPath) {
           `A response body includes a sensitive field (\`${km[1]}\`). Password hashes, secrets, and tokens must never ` +
           "leave the server — even hashed passwords help offline cracking and confirm account existence. Use Prisma " +
           "`select`/`omit` to return only safe fields, or map to a DTO before serialising.",
-        docs: "https://noctisnova.com/docs/auth/sensitive-data-exposure",
+        docs: "https://noctisnova.com/tools/auth-doctor/advanced-auth-security",
         penalty: PENALTY_SENSITIVE_EXPOSURE,
       });
       break; // one per file to avoid noise
