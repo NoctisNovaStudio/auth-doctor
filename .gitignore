@@ -1,0 +1,6 @@
+﻿node_modules/
+*.tgz
+.dead-doctor-report.json
+.auth-doctor-report.json
+.neat-doctor-report.json
+.orm-doctor-report.json

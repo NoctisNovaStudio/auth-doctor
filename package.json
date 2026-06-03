@@ -1,0 +1,49 @@
+{
+  "name": "auth-doctor",
+  "version": "1.0.1",
+  "description": "Static analysis CLI for detecting authentication and security vulnerabilities in Next.js TypeScript codebases.",
+  "type": "module",
+  "bin": {
+    "auth-doctor": "./index.js"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "auth",
+    "security",
+    "nextjs",
+    "jwt",
+    "csrf",
+    "static-analysis",
+    "typescript",
+    "cli",
+    "noctisnova"
+  ],
+  "author": "NoctisNova <hello@noctisnova.com> (https://noctisnova.com)",
+  "homepage": "https://noctisnova.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noctisnova/auth-doctor"
+  },
+  "bugs": {
+    "url": "https://github.com/noctisnova/auth-doctor/issues",
+    "email": "hello@noctisnova.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "boxen": "^8.0.1",
+    "chalk": "^5.4.1",
+    "clipboardy": "^4.0.0",
+    "ts-morph": "^24.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
