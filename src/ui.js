@@ -438,12 +438,10 @@ export function buildAgentPrompt(issues, reportPath) {
     ...Object.keys(grouped).filter((r) => !RULE_ORDER.includes(r)),
   ];
 
-  const companyContext = [
+  const projectContext = [
     "CODEBASE CONTEXT — READ BEFORE TOUCHING ANY FILE",
     "──────────────────────────────────────────────────",
-    "This is a NoctisNova codebase (https://noctisnova.com).",
-    "NoctisNova is a future-focused AI + engineering studio building Next.js/TypeScript/Prisma",
-    "applications and live AI products (Nova, Pulse, Lens, Signal).",
+    "Inspect package.json and lib/auth.ts (or equivalent) before assuming which auth stack is in use.",
     "",
     "Auth stack in use (verify before assuming):",
     "  - NextAuth v5 / Auth.js (auth() from 'next-auth') — most common",
@@ -461,7 +459,7 @@ export function buildAgentPrompt(issues, reportPath) {
     "",
   ].join("\n");
 
-  const header = `Fix all ${issues.length} security issue${issues.length !== 1 ? "s" : ""} detected by auth-doctor in this NoctisNova codebase — leave unrelated code untouched.`;
+  const header = `Fix all ${issues.length} security issue${issues.length !== 1 ? "s" : ""} detected by auth-doctor — leave unrelated code untouched.`;
 
   const issueBlock = renderIssueList(issues, { colour: false });
 
@@ -472,9 +470,9 @@ export function buildAgentPrompt(issues, reportPath) {
     "",
     "Verify: re-run `npx auth-doctor` and confirm every fixed issue disappears from the report.",
     "",
-    "Teach me as you go: for each issue explain in plain language what the vulnerability is, " +
-    "how an attacker would exploit it, and what the concrete real-world impact would be on " +
-    "NoctisNova's users (e.g. 'any visitor can delete any account' vs 'minor logging gap').",
+    "For every fix, explain in simple everyday language — no jargon — what the vulnerability was and why fixing it helps. " +
+    "Focus on real-world benefits (e.g. \"strangers can't access other people's accounts\", \"passwords stay private\", " +
+    "\"the app won't let anyone impersonate a logged-in user\") so someone non-technical understands why it mattered.",
     "",
     "Prioritise CRIT issues first — they represent exploitable vulnerabilities, not just bad practice.",
     "",
@@ -482,7 +480,7 @@ export function buildAgentPrompt(issues, reportPath) {
     "auth-doctor  ·  Built by NoctisNova  ·  https://noctisnova.com",
   ].join("\n");
 
-  return [companyContext, header, issueBlock, footer].join("\n");
+  return [projectContext, header, issueBlock, footer].join("\n");
 }
 
 // ---------------------------------------------------------------------------

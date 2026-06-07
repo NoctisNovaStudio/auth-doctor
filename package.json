@@ -1,6 +1,6 @@
 {
   "name": "auth-doctor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Static analysis CLI for detecting authentication and security vulnerabilities in Next.js TypeScript codebases.",
   "type": "module",
   "bin": {

@@ -309,7 +309,7 @@ npx auth-doctor --no-ai
 
 ## Agent Instructions
 
-When this skill is present in a NoctisNova repository, AI agents must:
+When this skill is present in a repository, AI agents must:
 
 1. **Run auth-doctor before proposing any auth-related changes** — surface all issues first.
 2. **Read `.auth-doctor-report.json`** for the full list of vulnerable files and lines, plus the `context` block (auth provider + middleware coverage).
@@ -319,6 +319,7 @@ When this skill is present in a NoctisNova repository, AI agents must:
 6. **Never trust client-supplied IDs** without verifying ownership against the authenticated user (`where: { id, userId: session.user.id }`).
 7. **Respect middleware coverage** — if the report shows a route is gated by an auth middleware matcher, don't add a redundant duplicate check.
 8. **Verify fixes** by re-running `npx auth-doctor` before marking any issue complete.
+9. **Explain every fix in simple everyday language** — no jargon. Say what the vulnerability was and why fixing it helps in terms a non-developer would understand (e.g. "strangers can't access other people's accounts", "passwords stay private").
 
 ---
 
